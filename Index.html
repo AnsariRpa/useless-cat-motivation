@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Useless Cat Motivation</title>
+</head>
+<body style="text-align:center; font-family:sans-serif;">
+
+  <h1>🐱 Useless Motivation Generator</h1>
+  <button onclick="getCat()">Give me motivation</button>
+
+  <div id="content" style="margin-top:20px;"></div>
+
+  <script>
+    const quotes = [
+      "You are 73% more productive than a potato today.",
+      "This cat believes in you. That’s enough.",
+      "You blinked. That’s progress.",
+      "Keep going. Or don’t. This cat doesn’t care.",
+      "Success is just failure with better lighting."
+    ];
+
+    async function getCat() {
+      const res = await fetch("https://api.thecatapi.com/v1/images/search");
+      const data = await res.json();
+
+      const img = data[0].url;
+      const quote = quotes[Math.floor(Math.random() * quotes.length)];
+
+      document.getElementById("content").innerHTML = `
+        <img src="${img}" width="300"/><br><br>
+        <p>${quote}</p>
+      `;
+    }
+  </script>
+
+</body>
+</html>
